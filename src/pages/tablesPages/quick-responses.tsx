@@ -30,7 +30,7 @@ export default function QuickResponses() {
 
   const handleAddOrEdit = () => {
     if (!newItem.name || !newItem.message) {
-      toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
+      toast({ variant: "destructive", description: t('pages.toasts.notRequirements') })
       return
     }
 
@@ -38,8 +38,10 @@ export default function QuickResponses() {
       const updatedData = [...data]
       updatedData[editingIndex] = { ...newItem }
       setData(updatedData)
+      toast({ description: t('pages.toasts.attSuccess') })
     } else {
       setData([...data, { ...newItem }])
+      toast({ description: t('pages.toasts.addSuccess') })
     }
     resetForm()
   }
@@ -65,6 +67,7 @@ export default function QuickResponses() {
 
   const handleDelete = (index: number) => {
     setData(data.filter((_, i) => i !== index))
+    toast({ description: t('pages.toasts.deleteSuccess') })
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -35,16 +35,16 @@ import {
 import { toast } from "@/components/ui/use-toast"
 
 type Item = {
-    name: string;
-    queue: number | string; // Aceita string inicialmente e depois é convertido para number
-    color: string;
-    message: string;
+    name: string
+    queue: number | string
+    color: string
+    message: string
 }
 
 type FunctionType = {
-    title: string;
-    text: string;
-    subfunctions: FunctionType[];
+    title: string
+    text: string
+    subfunctions: FunctionType[]
 }
 
 export default function QueueChatbot() {
@@ -74,15 +74,17 @@ export default function QueueChatbot() {
 
     const handleAddOrEdit = () => {
         if (!newItem.name || !newItem.color) {
-            toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
+            toast({ variant: "destructive", description: t('pages.toasts.notRequirements') })
             return
         }
 
         const updatedData = [...data]
         if (editingIndex !== null) {
             updatedData[editingIndex] = { ...newItem, queue: Number(newItem.queue) }
+            toast({ description: t('pages.toasts.attSuccess') })
         } else {
             updatedData.push({ ...newItem, queue: Number(newItem.queue) })
+            toast({ description: t('pages.toasts.addSuccess') })
         }
         setData(updatedData)
         resetForm()
@@ -97,6 +99,7 @@ export default function QueueChatbot() {
     }
 
     const handleDelete = (index: number) => {
+        toast({ description: t('pages.toasts.deleteSuccess') })
         setData(data.filter((_, i) => i !== index))
     }
 

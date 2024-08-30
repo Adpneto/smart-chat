@@ -10,13 +10,13 @@ import { useTranslation } from 'react-i18next'
 import { toast } from "@/components/ui/use-toast"
 
 interface DataItem {
-    name: string;
-    apiKey: string;
-    prompt: string;
-    option: string;
-    botTemperature: number;
-    maxTokens: number;
-    maxMessages: number;
+    name: string
+    apiKey: string
+    prompt: string
+    option: string
+    botTemperature: number
+    maxTokens: number
+    maxMessages: number
 }
 
 export default function TokenTable() {
@@ -49,7 +49,7 @@ export default function TokenTable() {
 
     const handleAddOrEdit = () => {
         if (!newItem.name || !newItem.apiKey || !newItem.prompt || newItem.maxTokens === 0 || newItem.maxMessages === 0) {
-            toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
+            toast({ variant: "destructive", description: t('pages.toasts.notRequirements') })
             return
         }
 
@@ -57,10 +57,11 @@ export default function TokenTable() {
             const updatedData = [...data]
             updatedData[editingIndex] = { ...newItem }
             setData(updatedData)
+            toast({ description: t('pages.toasts.attSuccess') })
         } else {
             setData([...data, { ...newItem }])
+            toast({ description: t('pages.toasts.addSuccess') })
         }
-
         resetForm()
     }
 
@@ -71,6 +72,7 @@ export default function TokenTable() {
     }
 
     const handleDelete = (index: number) => {
+        toast({ description: t('pages.toasts.deleteSuccess') })
         setData(data.filter((_, i) => i !== index))
     }
 

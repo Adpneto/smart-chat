@@ -1,33 +1,33 @@
-import { useState, ChangeEvent } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, ChangeEvent } from "react"
+import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "@/components/ui/select";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Pen, Trash } from "lucide-react";
-import { useTranslation } from "react-i18next";
-import { toast } from "@/components/ui/use-toast";
+} from "@/components/ui/select"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Pen, Trash } from "lucide-react"
+import { useTranslation } from "react-i18next"
+import { toast } from "@/components/ui/use-toast"
 
 interface DataItem {
-    id: number;
-    name: string;
-    password: string;
-    mail: string;
-    type: string;
-    queue: string;
-    pTicket: string;
+    id: number
+    name: string
+    password: string
+    mail: string
+    type: string
+    queue: string
+    pTicket: string
 }
 
 export default function Users() {
@@ -44,34 +44,32 @@ export default function Users() {
             pTicket: "",
         },
     ]);
-    // Função para obter o próximo ID disponível
+    
     const getNextId = (data: DataItem[]) => {
         const ids = data.map(item => item.id);
         return ids.length > 0 ? Math.max(...ids) + 1 : 1;
     };
 
     const [newItem, setNewItem] = useState<DataItem>({
-        id: getNextId(data), // Utiliza o próximo ID disponível ao iniciar
+        id: getNextId(data), 
         name: "",
         password: "",
         mail: "",
         type: "",
         queue: "",
         pTicket: "",
-    });
+    })
 
-    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-    const [editingIndex, setEditingIndex] = useState<number | null>(null);
-    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
+    const [editingIndex, setEditingIndex] = useState<number | null>(null)
+    const [searchQuery, setSearchQuery] = useState<string>("")
     const [validationErrors, setValidationErrors] = useState({
         name: false,
         password: false,
         mail: false,
         type: false,
         queue: false,
-    });
-
-
+    })
 
     const handleAddOrEdit = () => {
         const errors = {
@@ -80,23 +78,23 @@ export default function Users() {
             mail: !newItem.mail,
             type: !newItem.type,
             queue: !newItem.queue,
-        };
+        }
 
-        setValidationErrors(errors);
+        setValidationErrors(errors)
 
         if (Object.values(errors).some((error) => error)) {
-            toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
-            return;
+            toast({ variant: "destructive", description: t('pages.toasts.notRequirements') })
+            return
         }
 
         if (editingIndex !== null) {
-            const updatedData = [...data];
-            updatedData[editingIndex] = { ...newItem };
-            setData(updatedData);
-            toast({ description: "Usuário atualizado com sucesso!" });
+            const updatedData = [...data]
+            updatedData[editingIndex] = { ...newItem }
+            setData(updatedData)
+            toast({ description: t('pages.toasts.attSuccess') })
         } else {
-            setData([...data, { ...newItem, id: getNextId(data) }]); // Usa o próximo ID disponível ao adicionar
-            toast({ description: "Usuário adicionado com sucesso!" });
+            setData([...data, { ...newItem, id: getNextId(data) }])
+            toast({ description: t('pages.toasts.addSuccess') })
         }
 
         resetForm();
@@ -110,7 +108,7 @@ export default function Users() {
 
     const handleDelete = (index: number) => {
         setData(data.filter((_, i) => i !== index));
-        toast({ description: "Usuário removido com sucesso!" });
+        toast({ description: t('pages.toasts.deleteSuccess') })
     };
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -123,7 +121,7 @@ export default function Users() {
 
     const resetForm = () => {
         setNewItem({
-            id: getNextId(data), // Reseta o ID para o próximo disponível
+            id: getNextId(data),
             name: "",
             password: "",
             mail: "",
@@ -138,8 +136,8 @@ export default function Users() {
             type: false,
             queue: false,
         });
-        setIsDialogOpen(false);
-        setEditingIndex(null);
+        setIsDialogOpen(false)
+        setEditingIndex(null)
     };
 
     const filteredData = data.filter(
@@ -149,10 +147,9 @@ export default function Users() {
             item.type.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // Lista para os Selects
-    const types = ["Admin", "User"];
-    const queues = ["Fila 1", "Fila 2", "Fila 3"];
-    const connections = ["Conexão 1", "Conexão 2", "Conexão 3"];
+    const types = ["Admin", "User"]
+    const queues = ["Fila 1", "Fila 2", "Fila 3"]
+    const connections = ["Conexão 1", "Conexão 2", "Conexão 3"]
 
     return (
         <div className="mx-5 md:w-[1440px] p-5">
@@ -316,5 +313,5 @@ export default function Users() {
                 </TableBody>
             </Table>
         </div>
-    );
+    )
 }

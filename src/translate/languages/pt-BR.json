@@ -1,5 +1,11 @@
 {
     "pages": {
+        "toasts": {
+            "addSuccess": "Adicionado com sucesso!",
+            "attSuccess": "Conteudo atualizado com sucesso!",
+            "deleteSuccess": "Removido com sucesso!",
+            "notRequirements": "Por favor, preencha todos os campos."
+        },
         "dashboard": {
             "charts": {
                 "select": "Selecione o tempo",

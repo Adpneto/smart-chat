@@ -23,7 +23,7 @@ export default function Tags() {
 
     const handleAddOrEdit = () => {
         if (!newItem.name || !newItem.color) {
-            toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
+            toast({ variant: "destructive", description: t('pages.toasts.notRequirements') })
             return
         }
 
@@ -31,10 +31,11 @@ export default function Tags() {
             const updatedData = [...data]
             updatedData[editingIndex] = { ...newItem, inUse: Number(newItem.inUse) }
             setData(updatedData)
+            toast({ description: t('pages.toasts.attSuccess') })
         } else {
             setData([...data, { ...newItem, inUse: Number(newItem.inUse) }])
+            toast({ description: t('pages.toasts.addSuccess') })
         }
-
         setNewItem({ name: "", inUse: "", color: "#000000", isKanban: false })
         setIsDialogOpen(false)
         setEditingIndex(null)
@@ -49,6 +50,7 @@ export default function Tags() {
 
     const handleDelete = (index: number) => {
         setData(data.filter((_, i) => i !== index))
+        toast({ description: t('pages.toasts.deleteSuccess') })
     }
 
     const filteredData = data.filter(item =>
