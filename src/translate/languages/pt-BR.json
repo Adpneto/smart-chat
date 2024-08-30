@@ -234,6 +234,37 @@
                 "actions": "Ações",
                 "null": "Nenhum resultado encontrado."
             }
+        },
+        "queue": {
+            "table_name": "Filas & Chatbot",
+            "search": "Pesquisar...",
+            "add": "Adicionar",
+            "modal": {
+                "add": "Adicionar Fila",
+                "edit": "Editar Fila",
+                "name": "Nome",
+                "colorSelect": "Cor",
+                "queue": "Ordem da Fila (BOT)",
+                "integration": "Integração",
+                "prompt": "Prompt",
+                "message": "Mensagem de saudação",
+                "options": "Funções do Chatbot",
+                "untitledFunction": "Titulo não definido",
+                "functionTitle": "Titulo da Função",
+                "functionText": "Texto da Opção",
+                "addFunction": "Adicionar Funções",
+                "addSubFunction": "Adicionar Sub Função",
+                "deleteFunction": "Deletar Função",
+                "save": "Salvar",
+                "addNew": "Adicionar"
+            },
+            "table": {
+                "name": "Nome",
+                "queue": "Ordem da Fila (BOT)",
+                "message": "Texto",
+                "actions": "Ações",
+                "null": "Nenhum resultado encontrado."
+            }
         }
     },
     "formSchema": {

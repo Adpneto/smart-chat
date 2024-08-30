@@ -1,12 +1,13 @@
-import { useState, ChangeEvent } from "react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea"; // Importando o Textarea do ShadCN UI
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"; // Importando o Select do ShadCN UI
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Pen, Trash } from "lucide-react";
-import { useTranslation } from 'react-i18next';
+import { useState, ChangeEvent } from "react"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Pen, Trash } from "lucide-react"
+import { useTranslation } from 'react-i18next'
+import { toast } from "@/components/ui/use-toast"
 
 interface DataItem {
     name: string;
@@ -19,7 +20,7 @@ interface DataItem {
 }
 
 export default function TokenTable() {
-    const { t } = useTranslation();
+    const { t } = useTranslation()
 
     const [data, setData] = useState<DataItem[]>([
         {
@@ -30,7 +31,7 @@ export default function TokenTable() {
             name: "Thiago Turco", apiKey: "sk-demo-abcdef1234567890abcdef1234567890", prompt: "Explique o conceito de buracos negros em um nível que possa ser entendido por um estudante do ensino médio. Inclua uma analogia para ajudar a ilustrar o que acontece quando algo é sugado por um buraco negro."
             , option: "Texto", botTemperature: 0.7, maxTokens: 150, maxMessages: 15
         },
-    ]);
+    ])
 
     const [newItem, setNewItem] = useState<DataItem>({
         name: "",
@@ -40,63 +41,63 @@ export default function TokenTable() {
         botTemperature: 0.7,
         maxTokens: 0,
         maxMessages: 10
-    });
+    })
 
-    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-    const [editingIndex, setEditingIndex] = useState<number | null>(null);
-    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false)
+    const [editingIndex, setEditingIndex] = useState<number | null>(null)
+    const [searchQuery, setSearchQuery] = useState<string>("")
 
     const handleAddOrEdit = () => {
         if (!newItem.name || !newItem.apiKey || !newItem.prompt || newItem.maxTokens === 0 || newItem.maxMessages === 0) {
-            alert("Por favor, preencha todos os campos.");
-            return;
+            toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
+            return
         }
 
         if (editingIndex !== null) {
-            const updatedData = [...data];
-            updatedData[editingIndex] = { ...newItem };
-            setData(updatedData);
+            const updatedData = [...data]
+            updatedData[editingIndex] = { ...newItem }
+            setData(updatedData)
         } else {
-            setData([...data, { ...newItem }]);
+            setData([...data, { ...newItem }])
         }
 
-        resetForm();
-    };
+        resetForm()
+    }
 
     const handleEdit = (index: number) => {
-        setEditingIndex(index);
-        setNewItem(data[index]);
-        setIsDialogOpen(true);
-    };
+        setEditingIndex(index)
+        setNewItem(data[index])
+        setIsDialogOpen(true)
+    }
 
     const handleDelete = (index: number) => {
-        setData(data.filter((_, i) => i !== index));
-    };
+        setData(data.filter((_, i) => i !== index))
+    }
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value, type } = e.target;
+        const { name, value, type } = e.target
         setNewItem(prevState => ({
             ...prevState,
             [name]: type === 'number' ? parseFloat(value) : value
-        }));
-    };
+        }))
+    }
 
     const resetForm = () => {
-        setNewItem({ name: "", apiKey: "", prompt: "", option: "Texto", botTemperature: 0.7, maxTokens: 0, maxMessages: 10 });
-        setIsDialogOpen(false);
-        setEditingIndex(null);
-    };
+        setNewItem({ name: "", apiKey: "", prompt: "", option: "Texto", botTemperature: 0.7, maxTokens: 0, maxMessages: 10 })
+        setIsDialogOpen(false)
+        setEditingIndex(null)
+    }
 
     const filteredData = data.filter(item =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.prompt.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    )
 
     const truncate = (Text: string, maxLength: number) => {
         if (Text.length > maxLength) {
             return Text.substring(0, maxLength) + '...'
         }
-        return Text;
+        return Text
     }
 
     return (
@@ -233,5 +234,5 @@ export default function TokenTable() {
                 </Table>
             </div>
         </div>
-    );
+    )
 }

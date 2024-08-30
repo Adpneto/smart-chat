@@ -1,47 +1,47 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { useTranslation } from 'react-i18next';
-import { Card } from "@/components/ui/card";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { ChevronRight } from "lucide-react";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { useTranslation } from 'react-i18next'
+import { Card } from "@/components/ui/card"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { ChevronRight } from "lucide-react"
 
 export default function Payments() {
-    const { t } = useTranslation();
+    const { t } = useTranslation()
 
     const [invoices] = useState([
         { id: 1, plan: "START", amount: 100, status: "Devendo", dueDate: "2024-09-15" },
         { id: 2, plan: "PRO", amount: 250, status: "Pago", dueDate: "2024-08-15" },
-    ]);
+    ])
 
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [currentStep, setCurrentStep] = useState(1);
-    const [selectedInvoice, setSelectedInvoice] = useState<number | null>(null);
-    const [paymentMethod, setPaymentMethod] = useState("creditCard");
-    const [selectedCard, setSelectedCard] = useState<string | null>(null);
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [currentStep, setCurrentStep] = useState(1)
+    const [selectedInvoice, setSelectedInvoice] = useState<number | null>(null)
+    const [paymentMethod, setPaymentMethod] = useState("creditCard")
+    const [selectedCard, setSelectedCard] = useState<string | null>(null)
 
     const handlePayInvoice = (invoiceId: number) => {
-        setSelectedInvoice(invoiceId);
-        setCurrentStep(1);
-        setIsDialogOpen(true);
-    };
+        setSelectedInvoice(invoiceId)
+        setCurrentStep(1)
+        setIsDialogOpen(true)
+    }
 
     const handleNextStep = () => {
-        setCurrentStep((prev) => (prev < 3 ? prev + 1 : prev));
-    };
+        setCurrentStep((prev) => (prev < 3 ? prev + 1 : prev))
+    }
 
     const handlePreviousStep = () => {
-        setCurrentStep((prev) => (prev > 1 ? prev - 1 : prev));
-    };
+        setCurrentStep((prev) => (prev > 1 ? prev - 1 : prev))
+    }
 
     const handleCardClick = (cardType: string) => {
-        setSelectedCard(cardType);
-    };
+        setSelectedCard(cardType)
+    }
 
     const renderStepContent = () => {
-        const currentPlan = selectedInvoice !== null ? invoices.find(invoice => invoice.id === selectedInvoice)?.plan : "START";
+        const currentPlan = selectedInvoice !== null ? invoices.find(invoice => invoice.id === selectedInvoice)?.plan : "START"
 
         switch (currentStep) {
             case 1:
@@ -65,7 +65,7 @@ export default function Payments() {
                             ))}
                         </div>
                     </div>
-                );
+                )
             case 2:
                 return (
                     <div className="space-y-4">
@@ -92,7 +92,7 @@ export default function Payments() {
                             </div>
                         )}
                     </div>
-                );
+                )
             case 3:
                 return (
                     <div className="space-y-2">
@@ -155,11 +155,11 @@ export default function Payments() {
                             </div>
                         )}
                     </div>
-                );
+                )
             default:
-                return null;
+                return null
         }
-    };
+    }
 
     return (
         <div className="mx-5 md:w-[1440px] shadow-xl p-5">
@@ -272,5 +272,5 @@ export default function Payments() {
                 </DialogContent>
             </Dialog>
         </div>
-    );
+    )
 }

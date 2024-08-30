@@ -15,7 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import { Card } from "@/components/ui/card"
 import React from "react"
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next'
 
 export default function Register() {
     const { t } = useTranslation()

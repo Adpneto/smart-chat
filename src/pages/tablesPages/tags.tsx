@@ -1,58 +1,59 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Pen, Trash } from "lucide-react";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Pen, Trash } from "lucide-react"
 import { useTranslation } from 'react-i18next'
+import { toast } from "@/components/ui/use-toast"
 
 export default function Tags() {
 
-    const { t } = useTranslation();
+    const { t } = useTranslation()
 
     const [data, setData] = useState([
         { name: "Cliente", inUse: 2, color: "#4ade80", isKanban: true },
         { name: "Interessado", inUse: 3, color: "#60a5fa", isKanban: false },
-    ]);
+    ])
 
-    const [newItem, setNewItem] = useState({ name: "", inUse: "", color: "#000000", isKanban: false });
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [editingIndex, setEditingIndex] = useState<number | null>(null);
-    const [searchQuery, setSearchQuery] = useState("");
+    const [newItem, setNewItem] = useState({ name: "", inUse: "", color: "#000000", isKanban: false })
+    const [isDialogOpen, setIsDialogOpen] = useState(false)
+    const [editingIndex, setEditingIndex] = useState<number | null>(null)
+    const [searchQuery, setSearchQuery] = useState("")
 
     const handleAddOrEdit = () => {
         if (!newItem.name || !newItem.color) {
-            alert("Por favor, preencha todos os campos.");
-            return;
+            toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
+            return
         }
 
         if (editingIndex !== null) {
-            const updatedData = [...data];
-            updatedData[editingIndex] = { ...newItem, inUse: Number(newItem.inUse) };
-            setData(updatedData);
+            const updatedData = [...data]
+            updatedData[editingIndex] = { ...newItem, inUse: Number(newItem.inUse) }
+            setData(updatedData)
         } else {
-            setData([...data, { ...newItem, inUse: Number(newItem.inUse) }]);
+            setData([...data, { ...newItem, inUse: Number(newItem.inUse) }])
         }
 
-        setNewItem({ name: "", inUse: "", color: "#000000", isKanban: false });
-        setIsDialogOpen(false);
-        setEditingIndex(null);
-    };
+        setNewItem({ name: "", inUse: "", color: "#000000", isKanban: false })
+        setIsDialogOpen(false)
+        setEditingIndex(null)
+    }
 
     const handleEdit = (index: number) => {
-        setEditingIndex(index);
-        const itemToEdit = data[index];
-        setNewItem({ ...itemToEdit, inUse: String(itemToEdit.inUse) });
-        setIsDialogOpen(true);
-    };
+        setEditingIndex(index)
+        const itemToEdit = data[index]
+        setNewItem({ ...itemToEdit, inUse: String(itemToEdit.inUse) })
+        setIsDialogOpen(true)
+    }
 
     const handleDelete = (index: number) => {
-        setData(data.filter((_, i) => i !== index));
-    };
+        setData(data.filter((_, i) => i !== index))
+    }
 
     const filteredData = data.filter(item =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    )
 
     return (
         <div className="mx-5 md:w-[1440px] shadow-xl p-5">
@@ -163,5 +164,5 @@ export default function Tags() {
                 </Table>
             </div>
         </div>
-    );
+    )
 }

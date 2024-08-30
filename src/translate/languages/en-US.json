@@ -162,21 +162,101 @@
             },
             "dialog": {
                 "title": "Payment Process",
-                "planDetails": "Plan Details",
+                "planDetails": "Current Plan Details",
                 "plan": "Plan",
                 "amount": "Amount",
-                "summary": "Summary",
+                "step2": "Customize Your Plan",
+                "step2Datails": "You can continue with this current plan or change it for the next month!",
                 "dueDate": "Due Date",
                 "payment": "Payment",
-                "enterPaymentDetails": "Enter your payment details",
+                "enterPaymentDetails": "Enter Payment Details",
+                "paymentMethods": "Payment Methods",
+                "choosePaymentMethod": "Choose Payment Method:",
+                "creditCard": "Credit Card",
+                "boleto": "Boleto",
+                "pix": "PIX",
                 "cardNumber": "Card Number",
                 "expirationDate": "Expiration Date",
                 "cvv": "CVV",
                 "payNow": "Pay Now",
+                "generateBoleto": "Generate Boleto",
+                "payWithPix": "Pay with PIX",
                 "previous": "Previous",
                 "next": "Next",
                 "close": "Close",
-                "paymentProcessed": "Payment processed successfully!"
+                "paymentProcessed": "Payment processed successfully!",
+                "pixInstructions": "Use the QR code to pay with PIX, payment information will be sent by email!",
+                "boletoInstructions": "A boleto has been generated. Pay it at your bank or payment app, payment information will be sent by email!"
+            }
+        },
+        "users": {
+            "table_name": "Registered Users",
+            "search": "Search...",
+            "add": "Add",
+            "modal": {
+                "add": "Add New User",
+                "edit": "Edit User",
+                "name": "Name",
+                "password": "Password",
+                "mail": "Email",
+                "typeUser": {
+                    "input": "Role",
+                    "admin": "Administrator",
+                    "user": "User"
+                },
+                "queue": {
+                    "input": "Queue"
+                },
+                "conection": {
+                    "input": "Default Connection"
+                },
+                "permission": {
+                    "input": "Permission",
+                    "on": "Enabled",
+                    "off": "Disabled"
+                },
+                "save": "Save",
+                "addNew": "Add"
+            },
+            "table": {
+                "id": "ID",
+                "name": "Name",
+                "mail": "Email",
+                "permission": "Role",
+                "queue": "Queue",
+                "actions": "Actions",
+                "null": "No results found."
+            }
+        },
+        "queue": {
+            "table_name": "Queues & Chatbot",
+            "search": "Search...",
+            "add": "Add",
+            "modal": {
+                "add": "Add Queue",
+                "edit": "Edit Queue",
+                "name": "Name",
+                "colorSelect": "Color",
+                "queue": "Queue Order (BOT)",
+                "integration": "Integration",
+                "prompt": "Prompt",
+                "message": "Greeting Message",
+                "options": "Chatbot Functions",
+                "untitledFunction": "Untitled",
+                "functionTitle": "Function Title",
+                "functionText": "Option Text",
+                "addFunction": "Add Functions",
+                "addSubFunction": "Add Sub Function",
+                "deleteFunction": "Delete Function",
+                "save": "Save",
+                "addNew": "Add"
+            },
+            "table": {
+                "name": "Name",
+                "queue": "Queue Order (BOT)",
+                "message": "Text",
+                "actions": "Actions",
+                "null": "No results found."
             }
         }
     },

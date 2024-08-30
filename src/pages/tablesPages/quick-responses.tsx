@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Pen, Trash, Copy } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import React, { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Pen, Trash, Copy } from "lucide-react"
+import { useTranslation } from "react-i18next"
+import { toast } from "@/components/ui/use-toast"
 
 interface QuickResponseItem {
   name: string;
@@ -14,85 +15,85 @@ interface QuickResponseItem {
 }
 
 export default function QuickResponses() {
-  const { t } = useTranslation();
+  const { t } = useTranslation()
 
   const [data, setData] = useState<QuickResponseItem[]>([
     { name: "Saudações", message: "Olá {name}, como posso ajudar?", files: [] },
     { name: "Verificar", message: "Oi {name}, vou verificar isso para você.", files: [] },
-  ]);
+  ])
 
-  const [newItem, setNewItem] = useState<QuickResponseItem>({ name: "", message: "", files: [] });
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [duplicatingIndex, setDuplicatingIndex] = useState<number | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [newItem, setNewItem] = useState<QuickResponseItem>({ name: "", message: "", files: [] })
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [editingIndex, setEditingIndex] = useState<number | null>(null)
+  const [duplicatingIndex, setDuplicatingIndex] = useState<number | null>(null)
+  const [searchQuery, setSearchQuery] = useState<string>("")
 
   const handleAddOrEdit = () => {
     if (!newItem.name || !newItem.message) {
-      alert("Por favor, preencha todos os campos.");
-      return;
+      toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
+      return
     }
 
     if (editingIndex !== null) {
-      const updatedData = [...data];
-      updatedData[editingIndex] = { ...newItem };
-      setData(updatedData);
+      const updatedData = [...data]
+      updatedData[editingIndex] = { ...newItem }
+      setData(updatedData)
     } else {
-      setData([...data, { ...newItem }]);
+      setData([...data, { ...newItem }])
     }
-    resetForm();
-  };
+    resetForm()
+  }
 
   const resetForm = () => {
-    setNewItem({ name: "", message: "", files: [] });
-    setIsDialogOpen(false);
-    setEditingIndex(null);
-    setDuplicatingIndex(null);
-  };
+    setNewItem({ name: "", message: "", files: [] })
+    setIsDialogOpen(false)
+    setEditingIndex(null)
+    setDuplicatingIndex(null)
+  }
 
   const handleEdit = (index: number) => {
-    setEditingIndex(index);
-    setNewItem(data[index]);
-    setIsDialogOpen(true);
-  };
+    setEditingIndex(index)
+    setNewItem(data[index])
+    setIsDialogOpen(true)
+  }
 
   const handleDuplicate = (index: number) => {
-    setDuplicatingIndex(index);
-    setNewItem({ ...data[index], name: `${data[index].name} (Copy)` });
-    setIsDialogOpen(true);
-  };
+    setDuplicatingIndex(index)
+    setNewItem({ ...data[index], name: `${data[index].name} (Copy)` })
+    setIsDialogOpen(true)
+  }
 
   const handleDelete = (index: number) => {
-    setData(data.filter((_, i) => i !== index));
-  };
+    setData(data.filter((_, i) => i !== index))
+  }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setNewItem({ ...newItem, files: [...newItem.files, ...Array.from(e.target.files)] });
+      setNewItem({ ...newItem, files: [...newItem.files, ...Array.from(e.target.files)] })
     }
-  };
+  }
 
   const handleRemoveFile = (fileIndex: number) => {
     setNewItem((prevItem) => ({
       ...prevItem,
       files: prevItem.files.filter((_, index) => index !== fileIndex),
-    }));
-  };
+    }))
+  }
 
   const handleVariableInsert = (variable: string) => {
-    setNewItem({ ...newItem, message: newItem.message + variable });
-  };
+    setNewItem({ ...newItem, message: newItem.message + variable })
+  }
 
   const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  )
 
   const truncateFileName = (fileName: string, maxLength: number) => {
     if (fileName.length > maxLength) {
-      return fileName.substring(0, maxLength) + "...";
+      return fileName.substring(0, maxLength) + "..."
     }
-    return fileName;
-  };
+    return fileName
+  }
 
   return (
     <div className="mx-5 md:w-[1440px] shadow-xl p-5">
@@ -101,8 +102,8 @@ export default function QuickResponses() {
         <Dialog
           open={isDialogOpen}
           onOpenChange={(isOpen) => {
-            setIsDialogOpen(isOpen);
-            if (!isOpen) resetForm();
+            setIsDialogOpen(isOpen)
+            if (!isOpen) resetForm()
           }}
         >
           <div className="flex gap-2">
@@ -117,9 +118,9 @@ export default function QuickResponses() {
                 variant="outline"
                 size="lg"
                 onClick={() => {
-                  setEditingIndex(null);
-                  setDuplicatingIndex(null);
-                  setIsDialogOpen(true);
+                  setEditingIndex(null)
+                  setDuplicatingIndex(null)
+                  setIsDialogOpen(true)
                 }}
               >
                 {t("pages.quickresponses.add")}
@@ -256,5 +257,5 @@ export default function QuickResponses() {
         </Table>
       </div>
     </div>
-  );
+  )
 }

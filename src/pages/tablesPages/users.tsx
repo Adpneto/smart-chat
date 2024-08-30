@@ -85,7 +85,7 @@ export default function Users() {
         setValidationErrors(errors);
 
         if (Object.values(errors).some((error) => error)) {
-            toast({ variant: "destructive", description: "Por favor, preencha todos os campos." });
+            toast({ variant: "destructive", description: "Por favor, preencha todos os campos." })
             return;
         }
 
