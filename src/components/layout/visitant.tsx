@@ -1,12 +1,12 @@
-import { ReactNode } from "react";
-interface LayoutProps {
-    children: ReactNode;
-}
-
-export function LayoutVisitant({ children }: LayoutProps) {
-    return (
-        <div className="max-h-screen max-w-screen h-screen w-screen flex justify-center">
-            {children}
+import { Outlet } from "react-router-dom";
+const LayoutVisitant = () => {
+  return (
+    <div className="flex">
+            <main className="h-screen w-screen flex justify-center">
+                <Outlet/>
+            </main>
         </div>
-    );
-}
+  );
+};
+
+export default LayoutVisitant;

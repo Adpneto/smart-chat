@@ -152,7 +152,7 @@ export default function Users() {
     const connections = ["Conexão 1", "Conexão 2", "Conexão 3"]
 
     return (
-        <div className="mx-5 md:w-[1440px] p-5">
+        <div className="md:w-[1440px] shadow-xl p-5 w-full">
             <div className="flex flex-col space-y-2 md:flex-row justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">{t("pages.users.table_name")}</h2>
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -273,45 +273,47 @@ export default function Users() {
                 </Dialog>
             </div>
 
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="text-center">{t("pages.users.table.id")}</TableHead>
-                        <TableHead className="text-center">{t("pages.users.table.name")}</TableHead>
-                        <TableHead className="text-center">{t("pages.users.table.mail")}</TableHead>
-                        <TableHead className="text-center">{t("pages.users.table.permission")}</TableHead>
-                        <TableHead className="text-center">{t("pages.users.table.queue")}</TableHead>
-                        <TableHead className="text-center">{t("pages.users.table.actions")}</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {filteredData.map((item, index) => (
-                        <TableRow key={index}>
-                            <TableCell className="text-center">{item.id}</TableCell>
-                            <TableCell className="text-center">{item.name}</TableCell>
-                            <TableCell className="text-center">{item.mail}</TableCell>
-                            <TableCell className="text-center">{item.type}</TableCell>
-                            <TableCell className="text-center">{item.queue}</TableCell>
-                            <TableCell className="flex justify-center items-center">
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    onClick={() => handleEdit(index)}
-                                >
-                                    <Pen className="h-4 w-4" />
-                                </Button>
-                                <Button
-                                    variant="ghost"
-                                    size="icon"
-                                    onClick={() => handleDelete(index)}
-                                >
-                                    <Trash className="h-4 w-4" />
-                                </Button>
-                            </TableCell>
+            <div className="table-auto border rounded-md overflow-x-auto ">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead className="text-center">{t("pages.users.table.id")}</TableHead>
+                            <TableHead className="text-center">{t("pages.users.table.name")}</TableHead>
+                            <TableHead className="text-center">{t("pages.users.table.mail")}</TableHead>
+                            <TableHead className="text-center">{t("pages.users.table.permission")}</TableHead>
+                            <TableHead className="text-center">{t("pages.users.table.queue")}</TableHead>
+                            <TableHead className="text-center">{t("pages.users.table.actions")}</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {filteredData.map((item, index) => (
+                            <TableRow key={index}>
+                                <TableCell className="text-center">{item.id}</TableCell>
+                                <TableCell className="text-center">{item.name}</TableCell>
+                                <TableCell className="text-center">{item.mail}</TableCell>
+                                <TableCell className="text-center">{item.type}</TableCell>
+                                <TableCell className="text-center">{item.queue}</TableCell>
+                                <TableCell className="flex justify-center items-center">
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={() => handleEdit(index)}
+                                    >
+                                        <Pen className="h-4 w-4" />
+                                    </Button>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={() => handleDelete(index)}
+                                    >
+                                        <Trash className="h-4 w-4" />
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
         </div>
     )
 }

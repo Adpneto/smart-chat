@@ -19,7 +19,7 @@ export default function Dashboard() {
         {cards.map((cards, index) => (
           <Card key={index}>
             <CardContent className="flex justify-center items-center mt-8">
-              <cards.icon size={cards.iconSize}/>
+              <cards.icon size={cards.iconSize} />
             </CardContent>
             <CardFooter className="flex flex-col justify-center items-center">
               <CardTitle>{cards.count}{cards.title}</CardTitle>

@@ -20,52 +20,52 @@ import { useTranslation } from 'react-i18next'
 export default function Register() {
     const { t } = useTranslation()
 
-const formSchema = z.object({
-    corp_name: z.string({
-        required_error: t('formSchema.register.corp_name.required_error'),
-    })
-        .min(2, { message: t('formSchema.register.corp_name.min') })
-        .max(50, { message: t('formSchema.register.corp_name.max') })
-        .nonempty({ message: t('formSchema.register.corp_name.nonempty') })
-        .regex(/^[A-Za-z\s]+$/i, t('formSchema.register.corp_name.regex')),
+    const formSchema = z.object({
+        corp_name: z.string({
+            required_error: t('formSchema.register.corp_name.required_error'),
+        })
+            .min(2, { message: t('formSchema.register.corp_name.min') })
+            .max(50, { message: t('formSchema.register.corp_name.max') })
+            .nonempty({ message: t('formSchema.register.corp_name.nonempty') })
+            .regex(/^[A-Za-z\s]+$/i, t('formSchema.register.corp_name.regex')),
 
-    id: z.string({
-        required_error: t('formSchema.register.id.required_error'),
-    }).nonempty({ message: t('formSchema.register.id.nonempty') }),
+        id: z.string({
+            required_error: t('formSchema.register.id.required_error'),
+        }).nonempty({ message: t('formSchema.register.id.nonempty') }),
 
-    email: z.string({
-        required_error: t('formSchema.register.email.required_error'),
-    })
-        .email({ message: t('formSchema.register.email.email') }),
+        email: z.string({
+            required_error: t('formSchema.register.email.required_error'),
+        })
+            .email({ message: t('formSchema.register.email.email') }),
 
-    password: z.string({
-        required_error: t('formSchema.register.password.required_error'),
-    })
-        .min(8, { message: t('formSchema.register.password.min') })
-        .max(36, { message: t('formSchema.register.password.max') })
-        .regex(/[A-Z]/, { message: t('formSchema.register.password.regex_uppercase') })
-        .regex(/[a-z]/, { message: t('formSchema.register.password.regex_lowercase') })
-        .regex(/[!@#$%^&*(),.?":{}|<>]/, { message: t('formSchema.register.password.regex_special') }),
+        password: z.string({
+            required_error: t('formSchema.register.password.required_error'),
+        })
+            .min(8, { message: t('formSchema.register.password.min') })
+            .max(36, { message: t('formSchema.register.password.max') })
+            .regex(/[A-Z]/, { message: t('formSchema.register.password.regex_uppercase') })
+            .regex(/[a-z]/, { message: t('formSchema.register.password.regex_lowercase') })
+            .regex(/[!@#$%^&*(),.?":{}|<>]/, { message: t('formSchema.register.password.regex_special') }),
 
-    confirm_password: z.string({
-        required_error: t('formSchema.register.confirm_password.required_error'),
-    })
-        .min(8, { message: t('formSchema.register.confirm_password.min') })
-        .max(50, { message: t('formSchema.register.confirm_password.max') }),
+        confirm_password: z.string({
+            required_error: t('formSchema.register.confirm_password.required_error'),
+        })
+            .min(8, { message: t('formSchema.register.confirm_password.min') })
+            .max(50, { message: t('formSchema.register.confirm_password.max') }),
 
-    phone_number: z.string({
-        required_error: t('formSchema.register.phone_number.required_error'),
-    })
-        .length(11, { message: t('formSchema.register.phone_number.length') }),
+        phone_number: z.string({
+            required_error: t('formSchema.register.phone_number.required_error'),
+        })
+            .length(11, { message: t('formSchema.register.phone_number.length') }),
 
-    plans: z.string({
-        required_error: t('formSchema.register.plans.required_error'),
+        plans: z.string({
+            required_error: t('formSchema.register.plans.required_error'),
+        })
     })
-})
-    .refine(({ password, confirm_password }) => password === confirm_password, {
-        message: t('formSchema.register.password.refine'),
-        path: ["confirm_password"]
-    })
+        .refine(({ password, confirm_password }) => password === confirm_password, {
+            message: t('formSchema.register.password.refine'),
+            path: ["confirm_password"]
+        })
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -233,7 +233,7 @@ const formSchema = z.object({
                                                 {t('pages.register.terms')}
                                             </label>
                                             <p className="text-sm text-muted-foreground">
-                                            {t('pages.register.termsDesc')}
+                                                {t('pages.register.termsDesc')}
                                             </p>
                                         </div>
                                     </div>

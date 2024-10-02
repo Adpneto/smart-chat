@@ -99,7 +99,7 @@ export default function QuickResponses() {
   }
 
   return (
-    <div className="mx-5 md:w-[1440px] shadow-xl p-5">
+    <div className="md:w-[1440px] shadow-xl p-5">
       <div className="flex flex-col space-y-2 md:flex-row justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">{t("pages.quickresponses.table_name")}</h2>
         <Dialog
