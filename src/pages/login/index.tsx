@@ -15,24 +15,30 @@ import { toast } from "@/components/ui/use-toast"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ModeToggle } from "@/components/ui/mode-toggle"
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
 
     const { t } = useTranslation()
+    const navigate = useNavigate()
+
+    function register() {
+        navigate('/register')
+    }
 
     const formSchema = z.object({
         id: z.string({
-            required_error: t('formSchema.id.required_error')
-        }).nonempty({ message: t('formSchema.id.nonempty') }),
+            required_error: t('formSchema.login.id.required_error')
+        }).nonempty({ message: t('formSchema.login.id.nonempty') }),
     
         password: z.string({
-            required_error: t('formSchema.password.required_error')
+            required_error: t('formSchema.login.password.required_error')
         })
-            .min(8, { message: t('formSchema.password.min') })
-            .max(36, { message: t('formSchema.password.max') })
-            .regex(/[A-Z]/, { message: t('formSchema.password.regex_uppercase') })
-            .regex(/[a-z]/, { message: t('formSchema.password.regex_lowercase') })
-            .regex(/[!@#$%^&*(),.?":{}|<>]/, { message: t('formSchema.password.regex_special') })
+            .min(8, { message: t('formSchema.login.password.min') })
+            .max(36, { message: t('formSchema.login.password.max') })
+            .regex(/[A-Z]/, { message: t('formSchema.login.password.regex_uppercase') })
+            .regex(/[a-z]/, { message: t('formSchema.login.password.regex_lowercase') })
+            .regex(/[!@#$%^&*(),.?":{}|<>]/, { message: t('formSchema.login.password.regex_special') })
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -97,7 +103,7 @@ export default function Login() {
                                         <label htmlFor="savepass" className="text-sm font-medium laeding-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-black dark:text-white">{t('pages.login.rememberPassword')}</label>
                                     </div>
                                     <Button type="submit" className="w-full">{t('pages.login.signin')}</Button>
-                                    <h3 className="font-medium cursor-pointer text-sm">{t('pages.login.signInRemember')}</h3>
+                                    <h3 onClick={register} className="font-medium cursor-pointer text-sm">{t('pages.login.signInRemember')}</h3>
                                 </div>
                             </form>
                         </Form>

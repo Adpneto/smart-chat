@@ -23,12 +23,12 @@ function App() {
             {/* Rotas para visitantes */}
             <Route element={<LayoutVisitant />}>
               <Route path="/register" element={<Register />} />
-              <Route path="/" element={<Login />} />
+              <Route path="/login" element={<Login />} />
             </Route>
 
             {/* Rotas para clientes logados */}
             <Route element={<LayoutClient />}>
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/" element={<Dashboard />} />
               <Route path="/prompts" element={<Prompts />} />
               <Route path="/quickresponses" element={<QuickResponses />} />
               <Route path="/tags" element={<Tags />} />

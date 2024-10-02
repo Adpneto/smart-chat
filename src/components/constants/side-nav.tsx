@@ -9,7 +9,7 @@ export const NavItems = () => {
     {
       title: t('components.sidebar.dashboard'),
       icon: LayoutDashboard,
-      href: "/dashboard",
+      href: "/",
       color: "text-sky-500",
     },
     {

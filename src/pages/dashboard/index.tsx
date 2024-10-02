@@ -12,7 +12,7 @@ import UsersCharts2 from "./users-charts2";
 export default function Dashboard() {
 
   const cards = useCardData()
-
+  
   return (
     <div className="my-2 space-y-2 mx-2">
       <div className="grid grid-cols-2 md:grid-cols-6 gap-2">
