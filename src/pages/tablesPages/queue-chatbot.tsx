@@ -228,7 +228,7 @@ export default function QueueChatbot() {
     }
 
     return (
-        <div className="mx-5 md:w-[1440px] shadow-xl p-5">
+        <div className="md:w-[1440px] shadow-xl p-5 w-full">
             <div className="flex flex-col space-y-2 md:flex-row justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">{t("pages.queue.table_name")}</h2>
                 <Dialog open={isDialogOpen} onOpenChange={(open) => {
@@ -333,50 +333,52 @@ export default function QueueChatbot() {
                     </DialogContent>
                 </Dialog>
             </div>
-            <Table>
-                <TableHeader>
-                    <TableRow>
-                        <TableHead className="text-center">{t("pages.queue.table.name")}</TableHead>
-                        <TableHead className="text-center">{t("pages.queue.modal.queue")}</TableHead>
-                        <TableHead className="text-center">{t("pages.queue.table.message")}</TableHead>
-                        <TableHead className="text-center">{t("pages.queue.table.actions")}</TableHead>
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
-                    {filteredData.map((item, index) => (
-                        <TableRow key={index}>
-                            <TableCell className="text-center">
-                                <div className="px-3 py-1 rounded-sm  shadow-md font-bold inline-block"
-                                    style={{ backgroundColor: item.color }}>
-                                    {item.name}
-                                </div>
-                            </TableCell>
-                            <TableCell className="text-center">{item.queue}</TableCell>
-                            <TableCell className="text-center">{item.message}</TableCell>
-                            <TableCell className="text-center">
-                                <div className="flex items-center justify-center">
-                                    <Button
-                                        onClick={() => handleEdit(index)}
-                                        variant="ghost"
-                                        size="icon"
-                                        className="w-8 h-8 p-0"
-                                    >
-                                        <Pen size="1.2rem" />
-                                    </Button>
-                                    <Button
-                                        onClick={() => handleDelete(index)}
-                                        variant="ghost"
-                                        size="icon"
-                                        className="w-8 h-8 p-0"
-                                    >
-                                        <Trash size="1.2rem" />
-                                    </Button>
-                                </div>
-                            </TableCell>
+            <div className="table-auto border rounded-md overflow-x-auto ">
+                <Table>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHead className="text-center">{t("pages.queue.table.name")}</TableHead>
+                            <TableHead className="text-center">{t("pages.queue.modal.queue")}</TableHead>
+                            <TableHead className="text-center">{t("pages.queue.table.message")}</TableHead>
+                            <TableHead className="text-center">{t("pages.queue.table.actions")}</TableHead>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+                    </TableHeader>
+                    <TableBody>
+                        {filteredData.map((item, index) => (
+                            <TableRow key={index}>
+                                <TableCell className="text-center">
+                                    <div className="px-3 py-1 rounded-sm  shadow-md font-bold inline-block"
+                                        style={{ backgroundColor: item.color }}>
+                                        {item.name}
+                                    </div>
+                                </TableCell>
+                                <TableCell className="text-center">{item.queue}</TableCell>
+                                <TableCell className="text-center">{item.message}</TableCell>
+                                <TableCell className="text-center">
+                                    <div className="flex items-center justify-center">
+                                        <Button
+                                            onClick={() => handleEdit(index)}
+                                            variant="ghost"
+                                            size="icon"
+                                            className="w-8 h-8 p-0"
+                                        >
+                                            <Pen size="1.2rem" />
+                                        </Button>
+                                        <Button
+                                            onClick={() => handleDelete(index)}
+                                            variant="ghost"
+                                            size="icon"
+                                            className="w-8 h-8 p-0"
+                                        >
+                                            <Trash size="1.2rem" />
+                                        </Button>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </div>
         </div>
     )
 }

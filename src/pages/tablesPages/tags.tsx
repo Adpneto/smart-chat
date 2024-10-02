@@ -114,7 +114,7 @@ export default function Tags() {
                     </DialogContent>
                 </Dialog>
             </div>
-            <div className="table-auto border rounded-md">
+            <div className="table-auto border rounded-md overflow-x-auto ">
                 <Table>
                     <TableHeader>
                         <TableRow>

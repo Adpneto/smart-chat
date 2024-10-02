@@ -166,7 +166,7 @@ export default function Payments() {
             <div className="flex flex-col space-y-2 md:flex-row justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">{t('pages.payments.table_name')}</h2>
             </div>
-            <div className="table-auto border rounded-md">
+            <div className="table-auto border rounded-md overflow-x-auto ">
                 <Table>
                     <TableHeader>
                         <TableRow>
